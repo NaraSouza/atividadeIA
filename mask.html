@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Face Tracking</title>
+    <style>
+        video,
+        canvas {
+            position: absolute;
+            border: 1px solid red;
+        }
+        .buttons {
+            margin-left: 450px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div>
+        <video id="video" width="320" height="240" preload autoplay loop muted></video>
+        <canvas id="canvas" width="320" height="240"></canvas>
+    </div>
+
+    <div class="buttons">
+        <button id="btn1" type="button" onclick="maskOne()">Sunglasses Mask</button>
+        <button id="btn2" type="button" onclick="maskTwo()">Love Mask</button>
+        <button id="btn3" type="button" onclick="maskThree()">Rabbit Mask</button>
+    </div>
+
+    <img id="mask1" src="sunglasses mask.png" style="display: none;" />
+    <img id="mask2" src="love mask.png" style="display: none;" />
+    <img id="mask3" src="rabbit mask.png" style="display: none;" />
+
+    <script src="tracking-min.js"></script>
+    <script src="data/face-min.js"></script>
+
+    <script>
+        var mask = mask1
+
+        function maskOne() {
+            mask = mask1
+        }
+
+        function maskTwo() {
+            mask = mask2
+        }
+
+        function maskThree() {
+            mask = mask3
+        }
+
+        function init() {
+            const video = document.getElementById('video')
+            const canvas = document.getElementById('canvas')
+            const context = canvas.getContext('2d')
+            const tracker = new tracking.ObjectTracker('face')
+            tracking.track('#video', tracker, { camera: true })
+            tracker.on('track', event => {
+                console.log(event)
+                context.clearRect(0, 0, canvas.width, canvas.height)
+                event.data.forEach(rect => {
+                    context.drawImage(mask, rect.x, rect.y, rect.width, rect.height)
+                    context.strokeStyle = '#ff0000'
+                    context.lineWidth = 2
+                    context.strokeRect(rect.x, rect.y, rect.width, rect.height)
+                    console.log(rect)
+                });
+            })
+        }
+        window.onload = init()
+    </script>
+</body>
+
+</html>
