@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>tracking.js - face with camera</title>
+  <title>Face Sound</title>
 
   <script src="./tracking-min.js"></script>
   <script src="./data/face-min.js"></script>
@@ -32,20 +32,32 @@
       var video = document.getElementById('video');
       var canvas = document.getElementById('canvas');
       var context = canvas.getContext('2d');
-      var voice = new Wad({
-              source: 'mic',
-              tuna: {
-                Delay: {
-                  feedback: 0.45,    //0 to 1+
-                  delayTime: 1000,    //1 to 10000 milliseconds
-                  wetLevel: 0.25,    //0 to 1+
-                  dryLevel: 1,       //0 to 1+
-                  cutoff: 10000,      //cutoff frequency of the built in lowpass-filter. 20 to 22050
-                  bypass: 0
-                }
-              }
-            });
+      var voiceDelay = new Wad({
+        source: 'mic',
+        tuna: {
+          Delay: {
+            feedback: 0.8,    //0 to 1+
+            delayTime: 1000,    //1 to 10000 milliseconds
+            wetLevel: 0.25,    //0 to 1+
+            dryLevel: 0,       //0 to 1+
+            cutoff: 10000,      //cutoff frequency of the built in lowpass-filter. 20 to 22050
+            bypass: 0
+          }
+        }
+      });
+      var voiceTremolo = new Wad({
+        source: 'mic',
+        tuna: {
+          Tremolo: {
+            intensity: 1,    //0 to 1
+            rate: 8,         //0.001 to 8
+            stereoPhase: 100,    //0 to 180
+            bypass: 0
+          }
+        }
+      });
 
+      //Reconhecimento da face como um todo
       var tracker = new tracking.ObjectTracker('face');
       tracker.setInitialScale(4);
       tracker.setStepSize(2);
@@ -56,6 +68,7 @@
       tracker.on('track', function (event) {
         context.clearRect(0, 0, canvas.width, canvas.height);
 
+        //delimitação da área da face por retângulo
         event.data.forEach(function (rect) {
           context.strokeStyle = '#ff0000';
           context.strokeRect(rect.x, rect.y, rect.width, rect.height);
@@ -64,11 +77,14 @@
           context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
           context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
 
-          if (rect.x < 100) {
-            // You must give your browser permission to use your microphone before calling play().
-            voice.play()
+          //aplicação de efeito delay/tremolo na voz quando mover a cabeça para a direita/esquerda
+          if (rect.x < 95) {
+            voiceDelay.play()
+          } else if (rect.x > 140) {
+            voiceTremolo.play();
           } else {
-            voice.stop();
+            voiceDelay.stop();
+            voiceTremolo.stop();
           }
         });
       });
