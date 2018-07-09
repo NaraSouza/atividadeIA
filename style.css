@@ -1,0 +1,43 @@
+*{
+	/*background: url("background.jpeg");*/
+}
+
+#canvas, #video {
+	position: absolute;
+	width: 600px;
+	height: 400px;
+	left: 50%;
+	top: 50%;
+	margin-left: -300px; /* This is half the width */
+	margin-top: -200px; /* This is half the height */
+	z-index: 2; 
+}
+
+.demo-container {
+	position: absolute;
+	width: 600px;
+	height: 400px;
+	left: 50%;
+	top: 50%;
+	margin-left: -300px; /* This is half the width */
+	margin-top: -200px;
+	z-index: 2;
+	/*background-color: #292E42;*/
+}
+
+.titulo {
+	text-align: center;
+	font-family: "Clip";
+	font-size: 30px;
+	/*background-color: #292E42;*/
+}
+
+@font-face {
+	font-family: "Clip";
+	src: url("./fonts/clipRegular.ttf") format('truetype');
+}
+
+body {
+	z-index: 1;
+	background: url("background.jpeg");
+}

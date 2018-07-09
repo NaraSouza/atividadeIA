@@ -9,21 +9,20 @@
   <script src="./data/face-min.js"></script>
   <script src="./wad.min.js"></script>
 
-  <style>
-    video,
-    canvas {
-      margin-left: 230px;
-      margin-top: 120px;
-      position: absolute;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
+
+  <div class="titulo">
+    <h1>Face Sound</h1>
+  </div> 
+
 </head>
 
 <body>
   <div class="demo-frame">
     <div class="demo-container">
-      <video id="video" width="320" height="240" preload autoplay loop muted></video>
-      <canvas id="canvas" width="320" height="240"></canvas>
+
+      <video id="video" preload autoplay loop muted></video>
+      <canvas id="canvas"></canvas>
     </div>
   </div>
 
