@@ -13,7 +13,7 @@
 
   <div class="titulo">
     <h1>Face Sound</h1>
-  </div> 
+  </div>
 
 </head>
 
@@ -21,8 +21,8 @@
   <div class="demo-frame">
     <div class="demo-container">
 
-      <video id="video" preload autoplay loop muted></video>
-      <canvas id="canvas"></canvas>
+      <video id="video" width="600" height="400" preload autoplay loop muted></video>
+      <canvas id="canvas" width="600" height="400"></canvas>
     </div>
   </div>
 
@@ -44,13 +44,14 @@
           }
         }
       });
-      var voiceTremolo = new Wad({
+      var voiceOverdrive = new Wad({
         source: 'mic',
         tuna: {
-          Tremolo: {
-            intensity: 1,    //0 to 1
-            rate: 8,         //0.001 to 8
-            stereoPhase: 100,    //0 to 180
+          Overdrive: {
+            outputGain: 0.2,         //0 to 1+
+            drive: 0.5,              //0 to 1
+            curveAmount: 0,          //0 to 1
+            algorithmIndex: 1,       //0 to 5, selects one of our drive algorithms
             bypass: 0
           }
         }
@@ -76,14 +77,14 @@
           context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
           context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
 
-          //aplicação de efeito delay/tremolo na voz quando mover a cabeça para a direita/esquerda
-          if (rect.x < 95) {
+          //aplicação de efeito delay/overdrive na voz quando mover a cabeça para a direita/esquerda
+          if (rect.x < 160) {
             voiceDelay.play()
-          } else if (rect.x > 140) {
-            voiceTremolo.play();
+          } else if (rect.x > 260) {
+            voiceOverdrive.play();
           } else {
             voiceDelay.stop();
-            voiceTremolo.stop();
+            voiceOverdrive.stop();
           }
         });
       });
