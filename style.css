@@ -15,10 +15,10 @@
 
 @font-face {
 	font-family: "Clip";
-	src: url("./fonts/clipRegular.ttf") format('truetype');
+	src: url("./assets/fonts/clipRegular.ttf") format('truetype');
 }
 
 body {
 	z-index: 1;
-	background: url("background.jpeg");
+	background: url("./assets/background.jpeg");
 }
