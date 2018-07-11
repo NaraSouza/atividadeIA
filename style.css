@@ -1,16 +1,8 @@
-#canvas, #video {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	margin-left: -300px; /* This is half the width */
-	margin-top: -200px; /* This is half the height */
-	z-index: 2; 
-}
-
 .titulo {
 	text-align: center;
 	font-family: "Clip";
 	font-size: 30px;
+	color: #F6E2C9 ; 
 }
 
 @font-face {
@@ -20,5 +12,48 @@
 
 body {
 	z-index: 1;
-	background: url("./assets/background.jpeg");
+	background: url("./assets/background.png");
+}
+
+#canvas, #video {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -300px; /* This is half the width */
+	margin-top: -200px; /* This is half the height */
+	z-index: 2; 
+}
+
+.container {
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.text-img-container-left {
+    position: relative;
+    text-align: center;
+    color: #F6E2C9;
+}
+
+.text-img-container-right {
+    position: relative;
+    text-align: center;
+    color: #F6E2C9;
+}
+
+.top-left {
+    position: absolute;
+    top: 0px;
+	left: 16px;
+	font-size: 17px;
+}
+
+.bottom-right {
+    position: absolute;
+    bottom: 0px;
+	right: -8px;
+	font-size: 17px;
 }

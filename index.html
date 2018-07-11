@@ -18,12 +18,22 @@
 </head>
 
 <body>
-  <div class="demo-frame">
-    <div class="demo-container">
-
+  <div class="container">
+    <div class="video-canvas-container">
       <video id="video" width="600" height="400" preload autoplay loop muted></video>
       <canvas id="canvas" width="600" height="400"></canvas>
     </div>
+  
+    <div class="text-img-container-left">
+      <img src="./assets/left_up_arrow.png" style="width:10%;">
+      <div class="top-left">Mova o rosto para a esquerda para Eco</div>
+    </div>
+
+    <div class="text-img-container-right">
+      <img src="./assets/right_down_arrow.png" style="width:10%;">
+      <div class="bottom-right">Mova o rosto para a direita para Overdrive</div>
+    </div>
+  
   </div>
 
   <script>
@@ -35,8 +45,8 @@
         source: 'mic',
         tuna: {
           Delay: {
-            feedback: 0.8,    //0 to 1+
-            delayTime: 1000,    //1 to 10000 milliseconds
+            feedback: 0.5,    //0 to 1+
+            delayTime: 600,    //1 to 10000 milliseconds
             wetLevel: 0.25,    //0 to 1+
             dryLevel: 0,       //0 to 1+
             cutoff: 10000,      //cutoff frequency of the built in lowpass-filter. 20 to 22050
@@ -48,8 +58,8 @@
         source: 'mic',
         tuna: {
           Overdrive: {
-            outputGain: 0.2,         //0 to 1+
-            drive: 0.5,              //0 to 1
+            outputGain: 0,         //0 to 1+
+            drive: 1,              //0 to 1
             curveAmount: 0,          //0 to 1
             algorithmIndex: 1,       //0 to 5, selects one of our drive algorithms
             bypass: 0
